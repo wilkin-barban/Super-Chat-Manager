@@ -6,7 +6,7 @@ Multi-provider LLM configuration managed at runtime from the admin panel, replac
 
 ### Requirement: Multi-Provider Registry
 
-The system MUST support six LLM providers: OpenAI, Anthropic, OpenRouter, DeepSeek, Kimi, and Qwen, rendered as a visual Provider Cards Grid in the AI Management Dashboard. Each card MUST display provider status (`Configurado` / `Sin configurar`), `Proveedor Principal` badge for the active provider, current model name, 1-click default selection button, and modal editor trigger. Exactly one provider+model SHALL be the active default at any time; the others MAY be configured but inactive. OpenAI-compatible providers (OpenAI, OpenRouter, DeepSeek, Kimi, Qwen) SHALL be served through a shared OpenAI-protocol adapter with configurable base URL; Anthropic SHALL be served through a native `/v1/messages` adapter.
+The system MUST support six LLM providers: OpenAI, Anthropic, OpenRouter, DeepSeek, Kimi, and Qwen, rendered as a visual Provider Cards Grid in the AI Management Dashboard. Each card MUST display provider status (`Configurado` / `Sin configurar`), `Proveedor Principal` badge for the active provider, current model name, 1-click default selection button, and modal editor trigger. Exactly one provider+model SHALL be the active default when at least one provider has `configured: true`. When no provider is configured, `GET /api/admin/settings/llm` MUST return `defaultProvider: null` (or empty string), and unconfigured providers MUST return their own default catalog model from `getProviderModels(provider)[0]`. OpenAI-compatible providers (OpenAI, OpenRouter, DeepSeek, Kimi, Qwen) SHALL be served through a shared OpenAI-protocol adapter with configurable base URL; Anthropic SHALL be served through a native `/v1/messages` adapter.
 
 #### Scenario: Select a default provider
 
@@ -14,6 +14,14 @@ The system MUST support six LLM providers: OpenAI, Anthropic, OpenRouter, DeepSe
 - WHEN the admin configures "DeepSeek" with a valid key and model and saves
 - THEN DeepSeek becomes the active default
 - AND subsequent bot replies are generated via the DeepSeek adapter
+
+#### Scenario: Keyless default provider detection
+
+- GIVEN an authenticated admin loading the AI Management Dashboard when no provider has a configured API key
+- WHEN `GET /api/admin/settings/llm` is called
+- THEN the response MUST return `defaultProvider: null`
+- AND no provider card MUST display the `Proveedor Principal` badge
+- AND each unconfigured provider MUST return its catalog default model from `getProviderModels(provider)[0]`
 
 #### Scenario: Unknown provider rejected
 
@@ -51,7 +59,7 @@ The system MUST provide a 1-click "Establecer como Principal" button on each con
 
 ### Requirement: API Key Management with Connection Verification
 
-The system MUST verify an API key with a live test call to the provider before activating it, managed via a dedicated Provider Editor Modal/Drawer. A key that fails verification MUST NOT become active. On successful verification (`POST /api/admin/settings/llm/verify-key`), the response MUST include `{ ok: true, models: [...] }` containing the supported model catalog for the provider. The Provider Editor Modal MUST display masked API keys (`...1234`) and support both "Verificar y Guardar API Key" (key test & save) and "Guardar Modelo" (`PUT /api/admin/llm/providers/:name` for updating active model without key re-verification). Active configuration endpoints (`GET /api/admin/settings/llm`) MUST also return the supported model catalog. Keys SHALL be persisted in the settings store and MUST NOT be exposed in API responses or admin HTML in plain text.
+The system MUST verify an API key with a live test call to the provider before activating it, managed via a dedicated Provider Editor Modal/Drawer. A key that fails verification MUST NOT become active. When the verification model parameter is empty or omitted, the system MUST resolve the default test model to `getProviderModels(provider)[0]` for the target provider and MUST NOT pass `gpt-4o-mini` to non-OpenAI providers. On successful verification (`POST /api/admin/settings/llm/verify-key`), the response MUST include `{ ok: true, models: [...] }` containing the supported model catalog. The Provider Editor Modal MUST display masked API keys (`...1234`) and support both "Verificar y Guardar API Key" and "Guardar Modelo" (`PUT /api/admin/llm/providers/:name`). Active configuration endpoints (`GET /api/admin/settings/llm`) MUST also return the supported model catalog. Keys SHALL be persisted in the settings store and MUST NOT be exposed in plain text.
 
 #### Scenario: Valid key verified and saved
 
@@ -59,6 +67,14 @@ The system MUST verify an API key with a live test call to the provider before a
 - WHEN the admin clicks "Verify and save"
 - THEN the system SHALL perform a test call against OpenRouter returning `{ ok: true, models: [...] }`
 - AND on success persist the key, mark the provider ready, and return the available model list
+
+#### Scenario: Empty model parameter resolves to provider catalog default
+
+- GIVEN an admin verifying an API key for a non-OpenAI provider (e.g., DeepSeek) with an empty or omitted model field
+- WHEN `POST /api/admin/settings/llm/verify-key` is called
+- THEN the system MUST use `getProviderModels('deepseek')[0]` as the verification model
+- AND MUST NOT pass `gpt-4o-mini` to the provider verification request
+- AND on success MUST return `{ ok: true, models: [...] }`
 
 #### Scenario: Invalid API key
 
@@ -82,19 +98,26 @@ The system MUST verify an API key with a live test call to the provider before a
 
 ### Requirement: Dynamic Model Selection Input
 
-The Admin UI MUST render `#llm-model` as a `<select>` dropdown element instead of a free-text text input, preventing manual free-text model entry. The `#llm-model` dropdown MUST remain disabled on initial render when no verified API key is available. Upon successful API key verification or when loading saved provider settings with a verified key, the system MUST enable `#llm-model` and populate its options dynamically from the provider model catalog. If key verification fails or returns an error, `#llm-model` MUST remain disabled and surface the verification error to the admin.
+The Admin UI MUST render `#llm-model` as a `<select>` dropdown element instead of a free-text input, preventing manual model entry. When opening the Provider Editor Modal or entering an API key, the system MUST enable `#llm-model` and populate its options with provider catalog models from `getProviderModels(provider)` BEFORE key verification is executed. Upon API key verification or when loading saved provider settings, the system MUST preserve or update selectable options dynamically from the provider model catalog. If key verification fails or returns an error, pre-populated catalog options MAY remain in `#llm-model`, but verification errors MUST be displayed to the admin.
+
+#### Scenario: Pre-verification model dropdown population and enablement
+
+- GIVEN an admin opening the Provider Editor Modal or entering an API key for a selected provider (e.g., DeepSeek)
+- WHEN the modal opens or input changes BEFORE clicking verify
+- THEN the system MUST populate `#llm-model` with catalog options from `getProviderModels('deepseek')`
+- AND MUST enable `#llm-model` before verification is executed
 
 #### Scenario: Initial render without verified key
 
 - GIVEN an admin opening the LLM settings panel without a verified API key
 - WHEN the panel renders
-- THEN the `#llm-model` element MUST be a disabled `<select>` dropdown with no selectable model options
+- THEN the `#llm-model` element MUST be a `<select>` dropdown populated with target provider catalog models and enabled for selection
 
 #### Scenario: Dynamic population upon API key verification
 
 - GIVEN an admin entering an API key for a selected provider
 - WHEN the admin initiates verification and `POST /api/admin/settings/llm/verify-key` returns `{ ok: true, models: [...] }`
-- THEN the system MUST enable the `#llm-model` `<select>` element
+- THEN the system MUST ensure `#llm-model` is enabled
 - AND MUST populate the dropdown options with the returned `models` list
 
 #### Scenario: Free-text typing prevented
@@ -110,12 +133,12 @@ The Admin UI MUST render `#llm-model` as a `<select>` dropdown element instead o
 - THEN the system MUST fetch provider settings and supported model lists from the server
 - AND MUST automatically enable the `#llm-model` dropdown with the configured model selected
 
-#### Scenario: Invalid key verification keeps dropdown disabled
+#### Scenario: Invalid key verification error handling
 
-- GIVEN an admin entering an unverified or invalid API key
+- GIVEN an admin entering an invalid API key with pre-populated model dropdown
 - WHEN key verification fails or returns an error response
 - THEN the system MUST display the verification error message
-- AND MUST keep the `#llm-model` `<select>` dropdown disabled
+- AND MUST NOT activate the key or persist the provider configuration
 
 ### Requirement: Global AI On/Off Without Restart
 
