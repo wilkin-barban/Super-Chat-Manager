@@ -6,7 +6,7 @@ const { escapeHtml, safeCssColor } = require('../utils/sanitizer');
 // without localization.
 const HEALTH_I18N = {
   es: {
-    ok: 'Activo', off: 'Inactivo', eyebrow: 'LiveChat Pro health',
+    ok: 'Activo', off: 'Inactivo', eyebrow: 'Super Chat Manager health',
     title: 'Sistema operativo y listo para atender.',
     subtitle: 'Esta vista resume servidor, Telegram, sesiones, traducción, estado compartido y configuración visible del widget.',
     memory: 'Sesiones en memoria', shared: 'Estado compartido', adminLang: 'Idioma admin', uptime: 'Uptime',
@@ -14,7 +14,7 @@ const HEALTH_I18N = {
     links: 'Accesos rápidos', demo: 'Abrir demo', admin: 'Abrir admin', json: 'Ver JSON',
   },
   en: {
-    ok: 'Active', off: 'Inactive', eyebrow: 'LiveChat Pro health',
+    ok: 'Active', off: 'Inactive', eyebrow: 'Super Chat Manager health',
     title: 'System online and ready to help.',
     subtitle: 'This view summarizes the server, Telegram, sessions, translation, shared state and visible widget configuration.',
     memory: 'Sessions in memory', shared: 'Shared state', adminLang: 'Admin language', uptime: 'Uptime',
@@ -22,7 +22,7 @@ const HEALTH_I18N = {
     links: 'Quick links', demo: 'Open demo', admin: 'Open admin', json: 'View JSON',
   },
   pt: {
-    ok: 'Ativo', off: 'Inativo', eyebrow: 'LiveChat Pro health',
+    ok: 'Ativo', off: 'Inativo', eyebrow: 'Super Chat Manager health',
     title: 'Sistema online e pronto para atender.',
     subtitle: 'Esta tela resume servidor, Telegram, sessões, tradução, estado compartilhado e configuração visível do widget.',
     memory: 'Sessões em memória', shared: 'Estado compartilhado', adminLang: 'Idioma admin', uptime: 'Uptime',
@@ -30,7 +30,7 @@ const HEALTH_I18N = {
     links: 'Acessos rápidos', demo: 'Abrir demo', admin: 'Abrir admin', json: 'Ver JSON',
   },
   fr: {
-    ok: 'Actif', off: 'Inactif', eyebrow: 'LiveChat Pro health',
+    ok: 'Actif', off: 'Inactif', eyebrow: 'Super Chat Manager health',
     title: 'Système en ligne et prêt à répondre.',
     subtitle: 'Cette vue résume le serveur, Telegram, les sessions, la traduction, l’état partagé et la configuration visible du widget.',
     memory: 'Sessions en mémoire', shared: 'État partagé', adminLang: 'Langue admin', uptime: 'Uptime',
@@ -38,7 +38,7 @@ const HEALTH_I18N = {
     links: 'Accès rapides', demo: 'Ouvrir la démo', admin: 'Ouvrir admin', json: 'Voir JSON',
   },
   de: {
-    ok: 'Aktiv', off: 'Inaktiv', eyebrow: 'LiveChat Pro health',
+    ok: 'Aktiv', off: 'Inaktiv', eyebrow: 'Super Chat Manager health',
     title: 'System online und bereit.',
     subtitle: 'Diese Ansicht zeigt Server, Telegram, Sitzungen, Übersetzung, geteilten Status und sichtbare Widget-Konfiguration.',
     memory: 'Sitzungen im Speicher', shared: 'Geteilter Status', adminLang: 'Admin-Sprache', uptime: 'Uptime',

@@ -1,5 +1,5 @@
 // ============================================================
-// LiveChat Pro — db.js
+// Super Chat Manager — db.js
 // Asynchronous SQLite persistence layer (sqlite + sqlite3)
 // ============================================================
 'use strict';

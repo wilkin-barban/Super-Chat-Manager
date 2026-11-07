@@ -1,5 +1,5 @@
 # ============================================================
-# LiveChat Pro — Windows Installer Script
+# Super Chat Manager — Windows Installer Script
 # ============================================================
 
 $ErrorActionPreference = "Stop"
@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 # Clean UI Headers
 Clear-Host
 Write-Host "┌──────────────────────────────────────────────────────────┐" -ForegroundColor Cyan
-Write-Host "│             LiveChat Pro — Windows Installer             │" -ForegroundColor Cyan -Bold
+Write-Host "│             Super Chat Manager — Windows Installer             │" -ForegroundColor Cyan -Bold
 Write-Host "└──────────────────────────────────────────────────────────┘" -ForegroundColor Cyan
 Write-Host ""
 
@@ -47,7 +47,7 @@ if (-not $nodeInstalled -and -not $isAdmin) {
 # Initialize temporary log path to capture early installer tasks
 $LogPath = Join-Path $env:TEMP "livechat_install.log"
 "=== Instalacion ===" | Out-File -FilePath $LogPath
-"--- LiveChat Pro Windows installation log started at $(Get-Date) ---" | Out-File -FilePath $LogPath -Append
+"--- Super Chat Manager Windows installation log started at $(Get-Date) ---" | Out-File -FilePath $LogPath -Append
 
 # Function to run a task with a spinner
 function Run-TaskWithSpinner {
@@ -97,14 +97,14 @@ function Run-TaskWithSpinner {
 
 # Define Paths
 $DesktopPath = [System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::Desktop)
-$TargetDir = Join-Path $DesktopPath "LiveChat-Pro"
-$TempZip = Join-Path $env:TEMP "LiveChat-Pro.zip"
-$ExtractedTempDir = Join-Path $DesktopPath "LiveChat-Pro-main"
+$TargetDir = Join-Path $DesktopPath "Super-Chat-Manager"
+$TempZip = Join-Path $env:TEMP "Super-Chat-Manager.zip"
+$ExtractedTempDir = Join-Path $DesktopPath "Super-Chat-Manager-main"
 
 # Rename existing folder if found on Desktop to prevent overwriting
 if (Test-Path $TargetDir) {
-    Write-Host "[ℹ] Existing LiveChat-Pro directory found on Desktop. Renaming to avoid overwriting..." -ForegroundColor Yellow
-    $BaseBackupName = Join-Path $DesktopPath "LiveChat-Pro_Backup"
+    Write-Host "[ℹ] Existing Super-Chat-Manager directory found on Desktop. Renaming to avoid overwriting..." -ForegroundColor Yellow
+    $BaseBackupName = Join-Path $DesktopPath "Super-Chat-Manager_Backup"
     $BackupDir = $BaseBackupName
     $counter = 1
     while (Test-Path $BackupDir) {
@@ -121,7 +121,7 @@ if (Test-Path $ExtractedTempDir) {
 }
 
 # Download ZIP from GitHub repository
-$zipUrl = "https://github.com/wilkinbarban/LiveChat-Pro/archive/refs/heads/main.zip"
+$zipUrl = "https://github.com/wilkin-barban/Super-Chat-Manager/archive/refs/heads/main.zip"
 $downloadBlock = [scriptblock]::Create("Invoke-WebRequest -Uri '$zipUrl' -OutFile '$TempZip'")
 $success = Run-TaskWithSpinner "Downloading repository ZIP to Desktop" $downloadBlock
 if (-not $success) {
@@ -142,9 +142,9 @@ if (Test-Path $TempZip) {
     Remove-Item -Path $TempZip -Force
 }
 
-# Rename the extracted folder 'LiveChat-Pro-main' to 'LiveChat-Pro'
+# Rename the extracted folder 'Super-Chat-Manager-main' to 'Super-Chat-Manager'
 if (Test-Path $ExtractedTempDir) {
-    Rename-Item -Path $ExtractedTempDir -NewName "LiveChat-Pro"
+    Rename-Item -Path $ExtractedTempDir -NewName "Super-Chat-Manager"
 } else {
     Write-Host "[✗] Extracted folder was not found. Expected: $ExtractedTempDir" -ForegroundColor Red
     Exit 1

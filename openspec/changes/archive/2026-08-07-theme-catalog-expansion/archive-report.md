@@ -18,7 +18,7 @@
 | CRITICAL findings | 0 |
 | WARNING findings | 0 |
 
-The 4 EACCES failures observed on the host checkout are environmental (host `data/` owned by uid-1000 vs shell uid-1001) and are NOT regressions; the 405/405 run was executed in the verification worktree `/home/wilkin/proyectos/Chat-worktrees/theme-catalog-verify` with writable `data/`.
+The 4 EACCES failures observed on the host checkout are environmental (host `data/` owned by uid-1000 vs shell uid-1001) and are NOT regressions; the 405/405 run was executed in the verification worktree `/home/user/proyectos/Chat-worktrees/theme-catalog-verify` with writable `data/`.
 
 ## Task Completion
 

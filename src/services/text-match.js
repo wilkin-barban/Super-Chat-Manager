@@ -38,6 +38,7 @@ function normalizeStr(text) {
 function expandProjectAliases(text) {
   return String(text || '')
     .replace(/photo[\s-]?dedup/gi, 'photodup')
+    .replace(/super[\s-]?chat[\s-]?manager/gi, 'superchatmanager')
     .replace(/livechat[\s-]?pro/gi, 'livechat')
     .replace(/live[\s-]?chat/gi, 'livechat')
     .replace(/youtube[\s-]?downloader/gi, 'youtubedownloader');

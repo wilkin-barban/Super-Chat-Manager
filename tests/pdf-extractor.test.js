@@ -68,10 +68,10 @@ describe('PDF Extractor Utility (src/utils/pdf.js)', () => {
   });
 
   it('extrae el contenido de texto de un buffer PDF válido', async () => {
-    const pdfBuffer = createValidPdfBuffer('Manual de Usuario LiveChat');
+    const pdfBuffer = createValidPdfBuffer('Manual de Usuario Super Chat Manager');
     const text = await extractPdfText(pdfBuffer);
     assert.ok(typeof text === 'string', 'El resultado debe ser una cadena');
-    assert.match(text, /Manual de Usuario LiveChat/i);
+    assert.match(text, /Manual de Usuario Super Chat Manager/i);
   });
 
   it('extrae correctamente textos con caracteres de múltiples palabras', async () => {

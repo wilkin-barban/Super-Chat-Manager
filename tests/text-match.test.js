@@ -35,11 +35,13 @@ test('Text Match Service — Normalization and tokenization', async (t) => {
 
   await t.test('expandProjectAliases normalizes multi-word project names', () => {
     assert.equal(expandProjectAliases('instalar Photo Dedup'), 'instalar photodup');
+    assert.equal(expandProjectAliases('super-chat-manager ayuda'), 'superchatmanager ayuda');
     assert.equal(expandProjectAliases('livechat-pro ayuda'), 'livechat ayuda');
     assert.equal(expandProjectAliases('youtube-downloader config'), 'youtubedownloader config');
   });
 
   await t.test('tokenize returns clean array of normalized tokens', () => {
+    assert.deepEqual(tokenize('¿Cómo instalar Super Chat Manager?'), ['como', 'instalar', 'superchatmanager']);
     assert.deepEqual(tokenize('¿Cómo instalar LiveChat Pro?'), ['como', 'instalar', 'livechat']);
   });
 

@@ -6,7 +6,7 @@ blockers: 0
 critical_findings: 0
 requirements: 17/17
 scenarios: 31/31
-test_command: "TMPDIR=/home/wilkin/proyectos npm test"
+test_command: "TMPDIR=/home/user/proyectos npm test"
 test_exit_code: 0
 test_output_hash: sha256:3c051ce93695d4fa577f226d351ae7d52d457e9cef59d9c6408932ce9683f5b9
 build_command: "git diff --name-only c24a27f..HEAD -- '*.js' | xargs npx biome check --max-diagnostics=200 --reporter=summary"
@@ -44,9 +44,9 @@ Counts were taken from all four OpenSpec delta specifications. The condensed Eng
 ### Exact Command Evidence
 | Purpose | Exact command | Exit | Output SHA-256 | Result |
 |---|---|---:|---|---|
-| Full runtime suite (declared test evidence) | `TMPDIR=/home/wilkin/proyectos npm test` | 0 | `3c051ce93695d4fa577f226d351ae7d52d457e9cef59d9c6408932ce9683f5b9` | 527/527 passed; 46 tracked suites discovered |
-| Focused requirements runtime | `TMPDIR=/home/wilkin/proyectos node --test tests/session-sync.test.js tests/widget-responsive.test.js tests/fetch-ssrf.test.js tests/admin-rag-routes.test.js tests/rag-bounds.test.js tests/rag-core.test.js tests/logger-redact.test.js tests/shutdown.test.js tests/auth-secret.test.js tests/boot-without-token.test.js tests/presence.test.js tests/hygiene.test.js tests/test-script.test.js tests/admin-routes.test.js tests/alias-telemetry.test.js` | 0 | `15c7d0f86f258e6b4625c31f1f135d5cee638bedccb7fd42ff45d9bc88c0ecde` | 96/96 passed |
-| Focused coverage | `TMPDIR=/home/wilkin/proyectos node --experimental-test-coverage --test tests/session-sync.test.js tests/widget-responsive.test.js tests/fetch-ssrf.test.js tests/admin-rag-routes.test.js tests/rag-bounds.test.js tests/rag-core.test.js tests/logger-redact.test.js tests/shutdown.test.js tests/auth-secret.test.js tests/boot-without-token.test.js tests/presence.test.js tests/hygiene.test.js tests/test-script.test.js tests/admin-routes.test.js tests/alias-telemetry.test.js` | 0 | `e53f924fb03590c2c2d22972795bd88579889f461ecaf0c2a0e8a497aadf5270` | 96/96 passed; aggregate line 60.05%, branch 76.56% |
+| Full runtime suite (declared test evidence) | `TMPDIR=/home/user/proyectos npm test` | 0 | `3c051ce93695d4fa577f226d351ae7d52d457e9cef59d9c6408932ce9683f5b9` | 527/527 passed; 46 tracked suites discovered |
+| Focused requirements runtime | `TMPDIR=/home/user/proyectos node --test tests/session-sync.test.js tests/widget-responsive.test.js tests/fetch-ssrf.test.js tests/admin-rag-routes.test.js tests/rag-bounds.test.js tests/rag-core.test.js tests/logger-redact.test.js tests/shutdown.test.js tests/auth-secret.test.js tests/boot-without-token.test.js tests/presence.test.js tests/hygiene.test.js tests/test-script.test.js tests/admin-routes.test.js tests/alias-telemetry.test.js` | 0 | `15c7d0f86f258e6b4625c31f1f135d5cee638bedccb7fd42ff45d9bc88c0ecde` | 96/96 passed |
+| Focused coverage | `TMPDIR=/home/user/proyectos node --experimental-test-coverage --test tests/session-sync.test.js tests/widget-responsive.test.js tests/fetch-ssrf.test.js tests/admin-rag-routes.test.js tests/rag-bounds.test.js tests/rag-core.test.js tests/logger-redact.test.js tests/shutdown.test.js tests/auth-secret.test.js tests/boot-without-token.test.js tests/presence.test.js tests/hygiene.test.js tests/test-script.test.js tests/admin-routes.test.js tests/alias-telemetry.test.js` | 0 | `e53f924fb03590c2c2d22972795bd88579889f461ecaf0c2a0e8a497aadf5270` | 96/96 passed; aggregate line 60.05%, branch 76.56% |
 | Changed-file quality (declared build evidence) | `git diff --name-only c24a27f..HEAD -- '*.js' | xargs npx biome check --max-diagnostics=200 --reporter=summary` | 0 | `bde321474142a31efa8cdc1f216fd909b2e6594de7f8e8562f975a2e8e8768e9` | 33 changed JS files checked; 14 warnings, 7 infos, 0 errors |
 | Syntax, whitespace, Compose config | `node --check` on all changed production JS files, then `git diff --check c24a27f..HEAD`, then `docker compose config` | 0 | `5d1f2bfed3e48c04801cd837fd4e1b420cfe8c6d317c788d8776f226ffaf0737` | Passed with candidate-local copy of ignored `.env` |
 | Full repository lint | `npm run lint` | 1 | `0914c3d6ca294caa47bcc27a36b6ca6b561a61d87f8d2a71fc8996ccc8781df6` | 4 pre-existing errors outside this change, 28 warnings, 56 infos |

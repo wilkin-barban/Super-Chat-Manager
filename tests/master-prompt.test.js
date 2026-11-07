@@ -109,7 +109,7 @@ test('Master Prompt Service — Ported Identity Answers (6 Languages)', async (t
 
       const identityEntry = entries.find((e) => e.id === 'lcp-bot-identidad' || e.id === 'lcp-bot-identity' || e.id === 'lcp-bot-identidade');
       assert.ok(identityEntry, `Missing identity entry for ${lang}`);
-      assert.ok(identityEntry.answer.includes('LiveChat Pro'), `Identity answer in ${lang} should mention LiveChat Pro`);
+      assert.ok(identityEntry.answer.includes('Super Chat Manager'), `Identity answer in ${lang} should mention Super Chat Manager`);
     });
   }
 });

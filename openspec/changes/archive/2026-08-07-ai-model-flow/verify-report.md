@@ -47,10 +47,10 @@ $ SETTINGS_KEY=0123456789abcdef0123456789abcdef npm test
 # cancelled 0
 # skipped 0
 # todo 0
-(exit 0 — run in fresh worktree /home/wilkin/proyectos/Chat-worktrees/verify-ai-model-flow with writable data/)
+(exit 0 — run in fresh worktree /home/user/proyectos/Chat-worktrees/verify-ai-model-flow with writable data/)
 ```
 
-**Host-checkout run (environmental baseline)**: `356 tests / 352 pass / 4 fail` — the 4 failures are the KNOWN EACCES baseline (tests/api.test.js, tests/dead-code-audit.test.js, tests/telegram-routing.test.js, tests/translation-cache.test.js), all `EACCES: permission denied, open '/home/wilkin/proyectos/Chat/data/.admin-secret'` because host `data/` is owned by uid 1000 while the shell runs uid 1001. Byte-identical to main's baseline and proven non-regressive by the 403/403 all-green run in a writable worktree. Not treated as failures; `data/` was NOT chowned.
+**Host-checkout run (environmental baseline)**: `356 tests / 352 pass / 4 fail` — the 4 failures are the KNOWN EACCES baseline (tests/api.test.js, tests/dead-code-audit.test.js, tests/telegram-routing.test.js, tests/translation-cache.test.js), all `EACCES: permission denied, open '/home/user/proyectos/Chat/data/.admin-secret'` because host `data/` is owned by uid 1000 while the shell runs uid 1001. Byte-identical to main's baseline and proven non-regressive by the 403/403 all-green run in a writable worktree. Not treated as failures; `data/` was NOT chowned.
 
 **Coverage**: ➖ Not available (no coverage threshold configured in this project).
 

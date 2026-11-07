@@ -1,5 +1,5 @@
 // ============================================================
-// LiveChat Pro — server.js v4 (Phases 1-4: DB, security, Docker, CI/CD)
+// Super Chat Manager — server.js v4 (Phases 1-4: DB, security, Docker, CI/CD)
 // ============================================================
 'use strict';
 
@@ -550,7 +550,7 @@ async function start() {
     httpServer.once('error', reject);
     httpServer.listen(PORT, '0.0.0.0', () => {
       httpServer.off('error', reject);
-      logger.info({ port: PORT }, 'LiveChat Pro iniciado');
+      logger.info({ port: PORT }, 'Super Chat Manager iniciado');
       logger.info('Comandos Telegram: /usuarios /ban /info /clean');
       logger.info('Base de datos: data/livechat.db');
       resolve();

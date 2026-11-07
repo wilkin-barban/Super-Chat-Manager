@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# LiveChat Pro — Linux Installer Script
+# Super Chat Manager — Linux Installer Script
 # ============================================================
 
 set -o pipefail
@@ -16,27 +16,27 @@ RESET='\e[0m'
 
 # Check if setup.js exists. If not, we clone the repo and enter it
 if [ ! -f "setup.js" ]; then
-    if [ -e "LiveChat-Pro" ]; then
-        BACKUP_NAME="LiveChat-Pro_backup_$(date +%Y%m%d_%H%M%S)"
-        echo -e "${YELLOW}[ℹ]${RESET} Existing 'LiveChat-Pro' folder detected. Renaming it to '${BACKUP_NAME}' to avoid conflict..."
-        mv "LiveChat-Pro" "$BACKUP_NAME" || { echo -e "${RED}[✗] Failed to rename existing 'LiveChat-Pro' directory.${RESET}"; exit 1; }
+    if [ -e "Super-Chat-Manager" ]; then
+        BACKUP_NAME="Super-Chat-Manager_backup_$(date +%Y%m%d_%H%M%S)"
+        echo -e "${YELLOW}[ℹ]${RESET} Existing 'Super-Chat-Manager' folder detected. Renaming it to '${BACKUP_NAME}' to avoid conflict..."
+        mv "Super-Chat-Manager" "$BACKUP_NAME" || { echo -e "${RED}[✗] Failed to rename existing 'Super-Chat-Manager' directory.${RESET}"; exit 1; }
     fi
-    echo -e "${BLUE}[ℹ]${RESET} LiveChat Pro directory not detected. Cloning repository..."
+    echo -e "${BLUE}[ℹ]${RESET} Super Chat Manager directory not detected. Cloning repository..."
     if ! command -v git >/dev/null 2>&1; then
         echo -e "${RED}[✗] git is not installed. Please install git or run the script from the project root directory.${RESET}"
         exit 1
     fi
-    git clone https://github.com/wilkinbarban/LiveChat-Pro.git || { echo -e "${RED}[✗] Failed to clone repository.${RESET}"; exit 1; }
-    cd LiveChat-Pro || exit 1
+    git clone https://github.com/wilkin-barban/Super-Chat-Manager.git || { echo -e "${RED}[✗] Failed to clone repository.${RESET}"; exit 1; }
+    cd Super-Chat-Manager || exit 1
 fi
 
 # Clear log file on startup
 echo "=== Instalacion ===" > install.log
-echo "--- LiveChat Pro installation log started at $(date) ---" >> install.log
+echo "--- Super Chat Manager installation log started at $(date) ---" >> install.log
 
 # Show header
 echo -e "${CYAN}┌──────────────────────────────────────────────────────────┐${RESET}"
-echo -e "${CYAN}│${BOLD}             LiveChat Pro — Linux Installer               ${CYAN}│${RESET}"
+echo -e "${CYAN}│${BOLD}             Super Chat Manager — Linux Installer               ${CYAN}│${RESET}"
 echo -e "${CYAN}└──────────────────────────────────────────────────────────┘${RESET}"
 echo -e ""
 

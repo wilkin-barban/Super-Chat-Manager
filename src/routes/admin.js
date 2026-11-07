@@ -143,7 +143,7 @@ async function mapWithConcurrency(items, concurrency, mapper) {
 }
 
 async function fetchGithubRepository({ repository, fetchUrl, signal, selection = { mode: 'repository', includePaths: [] } }) {
-  const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'LiveChat-Pro/1.0' };
+  const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'Super-Chat-Manager/1.0' };
   const metadataResponse = await fetchUrl(repository.apiUrl, { signal, headers, timeoutMs: GITHUB_REPOSITORY_LIMITS.timeoutMs });
   if (!metadataResponse.ok) throw new Error(`GitHub metadata HTTP ${metadataResponse.status}`);
   const metadata = await metadataResponse.json();
@@ -181,7 +181,7 @@ async function fetchGithubRepository({ repository, fetchUrl, signal, selection =
   const downloaded = await mapWithConcurrency(selected, GITHUB_REPOSITORY_LIMITS.concurrency, async (file) => {
     const rawPath = file.path.split('/').map(encodeURIComponent).join('/');
     const rawUrl = `https://raw.githubusercontent.com/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.repository)}/${encodeURIComponent(commitSha)}/${rawPath}`;
-    const response = await fetchUrl(rawUrl, { signal, headers: { 'User-Agent': 'LiveChat-Pro/1.0' }, timeoutMs: GITHUB_REPOSITORY_LIMITS.timeoutMs, maxBytes: GITHUB_REPOSITORY_LIMITS.maxFileBytes });
+    const response = await fetchUrl(rawUrl, { signal, headers: { 'User-Agent': 'Super-Chat-Manager/1.0' }, timeoutMs: GITHUB_REPOSITORY_LIMITS.timeoutMs, maxBytes: GITHUB_REPOSITORY_LIMITS.maxFileBytes });
     if (!response.ok) throw new Error(`GitHub raw ${file.path} HTTP ${response.status}`);
     const declaredSize = Number(response.headers.get('content-length'));
     if (Number.isFinite(declaredSize) && declaredSize > GITHUB_REPOSITORY_LIMITS.maxFileBytes) {
@@ -1024,7 +1024,7 @@ function createAdminRouter(deps) {
         } else {
           const response = await fetchUrl(cleanUrl, {
             signal: controller.signal,
-            headers: { 'User-Agent': 'LiveChat-Pro/1.0' },
+            headers: { 'User-Agent': 'Super-Chat-Manager/1.0' },
           });
           if (!response.ok) {
             return res.status(400).json({ ok: false, error: `La URL respondió con código HTTP ${response.status}` });
