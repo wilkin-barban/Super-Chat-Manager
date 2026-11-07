@@ -1,8 +1,16 @@
 {
-  "name": "livechat-pro",
+  "name": "super-chat-manager",
   "version": "1.1.0",
-  "description": "Self-hosted educational live chat with Telegram integration",
+  "description": "Self-hosted Super Chat Manager with Telegram integration, RAG knowledge base, admin panel, SQLite and Docker deployment",
   "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilkin-barban/Super-Chat-Manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wilkin-barban/Super-Chat-Manager/issues"
+  },
+  "homepage": "https://github.com/wilkin-barban/Super-Chat-Manager#readme",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -42,5 +50,9 @@
   },
   "engines": {
     "node": ">=22"
+  },
+  "allowScripts": {
+    "sqlite3@6.0.1": true,
+    "canvas@2.11.2": true
   }
 }

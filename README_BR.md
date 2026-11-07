@@ -1,10 +1,15 @@
-# LiveChat Pro
+<div align="center">
+  <img src="assets/SuperChatManager.svg" alt="Super Chat Manager" width="220">
+  <h1>Super Chat Manager</h1>
+</div>
 
 > Projeto educativo: este repositório foi pensado para aprendizado, experimentação e referência técnica. Revise, reforce e adapte a configuração antes de usá-lo em produção.
 
+> **Nota de compatibilidade.** Super Chat Manager é o sucessor rebrandeado do LiveChat Pro. O banco interno (`data/livechat.db`), o volume Docker (`livechat_data`), o prefixo Redis (`lcp`), as variáveis de ambiente do setup (`LIVECHAT_*`) e o cookie de sessão (`lchat_sid`) mantêm os nomes legacy para que instalações e dados existentes continuem funcionando. O widget aceita `SuperChatManagerConfig` e os objetos legacy `LiveChatConfig`/`LiveChatProConfig`.
+
 [Español](README_ES.md) | [English](README.md) | [Português](README_BR.md)
 
-Chat ao vivo auto-hospedado com widget incorporável, integração com Telegram, painel web único de administração, persistência SQLite e implantação recomendada com Docker.
+Super Chat Manager é um gerenciador de chat ao vivo auto-hospedado com widget incorporável, integração com Telegram, painel web único de administração, base de conhecimento RAG, persistência SQLite e implantação recomendada com Docker.
 
 ## Novidades da versão 1.1.0
 
@@ -45,7 +50,7 @@ Para VPS público:
 - Linux com usuário que tenha `sudo`
 - Node.js do sistema `>=24`
 - Docker Engine + plugin Docker Compose
-- Porta `8080/tcp` aberta para o LiveChat Pro
+- Porta `8080/tcp` aberta para o Super Chat Manager
 - Bot do Telegram criado com [@BotFather](https://t.me/BotFather)
 - Seu ID numérico do Telegram
 
@@ -55,13 +60,13 @@ Para configurar rapidamente o ambiente, verificar dependências, clonar o reposi
 
 ### Linux
 ```bash
-curl -fsSL https://raw.githubusercontent.com/wilkinbarban/LiveChat-Pro/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/wilkin-barban/Super-Chat-Manager/main/install.sh | bash
 ```
 
 ### Windows (PowerShell Administrador)
 Abra o PowerShell como Administrador e execute:
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/wilkinbarban/LiveChat-Pro/main/install.ps1 | iex"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/wilkin-barban/Super-Chat-Manager/main/install.ps1 | iex"
 ```
 
 ---
@@ -76,7 +81,7 @@ Quando você executa o instalador automático no Linux, ele realiza a seguinte s
    - **Git**: Verifica se o `git` está disponível. Se faltar, instala-o automaticamente.
    - **Node.js e npm**: Procura pelo Node.js (versão 24 ou superior). Se faltar ou estiver desatualizado, configura os repositórios oficiais da NodeSource ou do sistema para instalar a versão estável mais recente do runtime junto com o `npm`.
    - **Docker e Docker Compose**: Verifica se o Docker Engine e o plugin do Docker Compose estão instalados. Se faltarem, realiza a instalação completa, inicia o serviço do Docker e o configura para inicializar com o sistema.
-4. **Verificação do Diretório do Projeto**: Confirma se o arquivo `setup.js` existe no diretório atual de trabalho. Se não for encontrado, o script clona automaticamente o repositório a partir de `https://github.com/wilkinbarban/LiveChat-Pro.git` em uma pasta chamada `LiveChat-Pro` e entra nela.
+4. **Verificação do Diretório do Projeto**: Confirma se o arquivo `setup.js` existe no diretório atual de trabalho. Se não for encontrado, o script clona automaticamente o repositório a partir de `https://github.com/wilkin-barban/Super-Chat-Manager.git` em uma pasta chamada `Super-Chat-Manager` e entra nela.
 5. **Assistente de Configuração Interativo**: Executa `node setup.js` para solicitar as variáveis de ambiente e gerar um arquivo `.env` personalizado.
 6. **Compiliação e Inicialização dos Contêineres**: Oferece compilar e iniciar os serviços imediatamente por meio do comando `docker compose up -d --build`.
 7. **Registro de Execução**: Redireciona a saída de todas as verificações e instalações para o arquivo `install.log` em segundo plano, exibindo um indicador de progresso animado no terminal.
@@ -87,13 +92,13 @@ Quando você executa o instalador automático do Windows no PowerShell, ele exec
 2. **Verificação e Instalação de Dependências**:
    - **Git**: Inspeciona se o Git está instalado. Caso falte, utiliza o `winget` (Windows Package Manager) para instalá-lo ou faz o download direto caso o `winget` não esteja disponível.
    - **Node.js e npm**: Procura pelo Node.js (versão 24 ou superior). Se faltar, baixa e executa o instalador oficial do MSI silenciosamente, atualizando as variáveis de ambiente.
-3. **Verificação do Diretório do Projeto**: Procura por `setup.js`. Se ausente, chama o Git para clonar o projeto a partir de `https://github.com/wilkinbarban/LiveChat-Pro.git` e entra na pasta do projeto.
+3. **Verificação do Diretório do Projeto**: Procura por `setup.js`. Se ausente, chama o Git para clonar o projeto a partir de `https://github.com/wilkin-barban/Super-Chat-Manager.git` e entra na pasta do projeto.
 4. **Resolução Direta de Dependências (npm install)**: Executa `npm install` diretamente no sistema operacional hospedeiro para instalar as bibliotecas de Node.js necessárias.
 5. **Lançamento do Assistente**: Inicializa o assistente interativo de configuração (`node setup.js`) para definir o token do bot do Telegram, credenciais do administrador e preferências.
 6. **Inicialização Opcional do Servidor**: Ao término da configuração, o script pergunta se você deseja iniciar o servidor de chat diretamente utilizando o Node (`node server.js`).
 7. **Arquitetura Sem Docker**:
    > [!IMPORTANT]
-   > O LiveChat Pro no Windows foi projetado para rodar nativamente. **Ele não requer, utiliza ou instala o Docker, Docker Desktop ou qualquer outro serviço de contêineres no Windows**. Todo o servidor, o banco de dados e as tarefas em segundo plano rodam diretamente no sistema Windows local como processos padrão do Node.js.
+   > O Super Chat Manager no Windows foi projetado para rodar nativamente. **Ele não requer, utiliza ou instala o Docker, Docker Desktop ou qualquer outro serviço de contêineres no Windows**. Todo o servidor, o banco de dados e as tarefas em segundo plano rodam diretamente no sistema Windows local como processos padrão do Node.js.
 8. **Registro de Execução**: Toda a saída de console do instalador é salva no arquivo `install.log` em segundo plano para fins de diagnóstico.
 
 ---
@@ -141,8 +146,8 @@ Se você preferir não utilizar os scripts automáticos, pode configurar o proje
      ```
 2. **Clonar o Repositório**:
    ```bash
-   git clone https://github.com/wilkinbarban/LiveChat-Pro.git
-   cd LiveChat-Pro
+   git clone https://github.com/wilkin-barban/Super-Chat-Manager.git
+   cd Super-Chat-Manager
    ```
 3. **Instalar Dependências Locais do Projeto**:
    ```bash
@@ -166,12 +171,12 @@ Se você preferir não utilizar os scripts automáticos, pode configurar o proje
 ### Windows (Baseado em Node / Servidor Direto)
 1. **Instalar Pré-requisitos**: Baixe e instale o Git pelo site [git-scm.com](https://git-scm.com/) e o Node.js (versão 24 ou superior) pelo site [nodejs.org](https://nodejs.org/).
    > [!NOTE]
-   > O LiveChat Pro no Windows não requer, não utiliza e não instala o Docker. Todo o sistema roda nativamente no seu sistema operacional.
+   > O Super Chat Manager no Windows não requer, não utiliza e não instala o Docker. Todo o sistema roda nativamente no seu sistema operacional.
 2. **Clonar o Repositório**:
    Abra o PowerShell ou Prompt de Comando e execute:
    ```powershell
-   git clone https://github.com/wilkinbarban/LiveChat-Pro.git
-   cd LiveChat-Pro
+   git clone https://github.com/wilkin-barban/Super-Chat-Manager.git
+   cd Super-Chat-Manager
    ```
 3. **Instalar Dependências**:
    ```powershell
@@ -202,7 +207,7 @@ node server.js
 Com PM2:
 ```bash
 npm install -g pm2
-pm2 start server.js --name livechat-pro
+pm2 start server.js --name super-chat-manager
 pm2 startup
 pm2 save
 ```
@@ -366,11 +371,11 @@ Para um site móvel onde o teclado cobre demais o histórico, você pode reduzir
 </script>
 ```
 
-Também é possível defini-las antes do script com `window.LiveChatConfig`:
+Também é possível defini-las antes do script com `window.SuperChatManagerConfig`:
 
 ```html
 <script>
-  window.LiveChatConfig = {
+  window.SuperChatManagerConfig = {
     mobileBreakpoint: 820,
     mobileMode: 'dock',
     mobileWidth: 100,
@@ -550,8 +555,8 @@ Se `/health` devolver `stateMode: "redis"`, Redis está ativo.
 Para domínio real com HTTPS, você pode usar o arquivo incluído:
 
 ```bash
-sudo cp nginx/livechat.conf /etc/nginx/sites-available/livechat
-sudo ln -s /etc/nginx/sites-available/livechat /etc/nginx/sites-enabled/
+sudo cp nginx/super-chat-manager.conf /etc/nginx/sites-available/super-chat-manager
+sudo ln -s /etc/nginx/sites-available/super-chat-manager /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -570,11 +575,11 @@ ALLOWED_ORIGINS="https://chat.meudominio.com"
 
 Os cookies admin são marcados como `Secure` quando a requisição chega por HTTPS ou por proxy com `X-Forwarded-Proto: https`. Em desenvolvimento por IP HTTP funcionam sem `Secure`.
 
-A geolocalização do admin depende de o Node receber o IP público real do visitante. O template `nginx/livechat.conf` já envia `X-Real-IP` e `X-Forwarded-For`; se o painel mostrar IPs `127.x`, `10.x`, `172.16-31.x` ou `192.168.x`, o servidor está vendo um IP privado de Docker/proxy e a localização aparecerá como desconhecida. Nesse caso, use Nginx/HTTPS na frente do contêiner ou verifique que o proxy preserva esses cabeçalhos.
+A geolocalização do admin depende de o Node receber o IP público real do visitante. O template `nginx/super-chat-manager.conf` já envia `X-Real-IP` e `X-Forwarded-For`; se o painel mostrar IPs `127.x`, `10.x`, `172.16-31.x` ou `192.168.x`, o servidor está vendo um IP privado de Docker/proxy e a localização aparecerá como desconhecida. Nesse caso, use Nginx/HTTPS na frente do contêiner ou verifique que o proxy preserva esses cabeçalhos.
 
 ## Cenários de Configuração
 
-Para ajudá-lo a configurar e implantar o LiveChat Pro, abaixo são detalhados os dois cenários de instalação mais comuns.
+Para ajudá-lo a configurar e implantar o Super Chat Manager, abaixo são detalhados os dois cenários de instalação mais comuns.
 
 ### Cenário 1: Implantação em Produção com Proxy Reverso e Subcaminho (HTTPS)
 
@@ -591,9 +596,9 @@ COOKIE_SAME_SITE="none"
 ```
 
 #### 2. Bloco de Proxy Reverso no Nginx
-Adicione o seguinte bloco à sua configuração de servidor no Nginx (normalmente em `/etc/nginx/sites-available/livechat`). Certifique-se de ter os certificados SSL configurados (ex., via Let's Encrypt).
+Adicione o seguinte bloco à sua configuração de servidor no Nginx (normalmente em `/etc/nginx/sites-available/super-chat-manager`). Certifique-se de ter os certificados SSL configurados (ex., via Let's Encrypt).
 ```nginx
-upstream livechat_backend {
+upstream super_chat_manager_backend {
     server 127.0.0.1:8080;
     keepalive 32;
 }
@@ -607,7 +612,7 @@ server {
 
     # Suporte para upgrade de conexões WebSocket
     location /chat/ {
-        proxy_pass http://livechat_backend/;
+        proxy_pass http://super_chat_manager_backend/;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection $connection_upgrade;
@@ -621,7 +626,7 @@ server {
 
     # Roteamento explícito para o caminho socket.io de WebSockets
     location /chat/socket.io/ {
-        proxy_pass http://livechat_backend/socket.io/;
+        proxy_pass http://super_chat_manager_backend/socket.io/;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection $connection_upgrade;
@@ -641,7 +646,7 @@ Incorpore o widget em suas páginas usando a URL com o subcaminho `/chat`:
 <script src="https://mywebsite.com/chat/widget.js" data-server="https://mywebsite.com/chat"></script>
 ```
 
-> **Embed em produção:** sirva a página e o widget por HTTPS. Se o LiveChat Pro estiver em um subpath do proxy reverso, `src` e `data-server` devem usar o mesmo subpath público. O proxy deve encaminhar `/socket.io/` com os cabeçalhos WebSocket `Upgrade`/`Connection`; nunca exponha o endereço privado do contêiner.
+> **Embed em produção:** sirva a página e o widget por HTTPS. Se o Super Chat Manager estiver em um subpath do proxy reverso, `src` e `data-server` devem usar o mesmo subpath público. O proxy deve encaminhar `/socket.io/` com os cabeçalhos WebSocket `Upgrade`/`Connection`; nunca exponha o endereço privado do contêiner.
 
 #### 4. URLs de Administração e Estado (Health)
 Após a implantação, o painel de administração e os endpoints de verificação de status estarão acessíveis em:
@@ -688,7 +693,7 @@ public/index.html   Demo do widget
 public/admin.html   Painel admin único
 docker-compose.yml  App + Redis + volumes
 Dockerfile          Imagem de produção
-nginx/livechat.conf Proxy reverso HTTPS
+nginx/super-chat-manager.conf Proxy reverso HTTPS
 tests/              Testes automáticos
 data/livechat.db    Banco SQLite em execução local sem Docker
 ```
@@ -758,7 +763,7 @@ Mostra estado geral, sessões em memória, modo de estado (`memory` ou `redis`),
 
 ## 🤖 Smart Bot / AI
 
-O LiveChat Pro inclui um bot inteligente opcional que responde visitantes automaticamente antes de escalar para um humano.
+O Super Chat Manager inclui um bot inteligente opcional que responde visitantes automaticamente antes de escalar para um humano.
 
 | `BOT_MODE` | Comportamento |
 |---|---|
@@ -811,4 +816,4 @@ Use `--interactive` para um fluxo guiado como o que o `setup.js` executa. Ele pe
 
 **Opções CLI:** `--interactive`, `--provider`, `--key`, `--model`, `--base-url`, `--urls`, `--mode append|replace`, `--output`, `--lang`, `--dry-run`, `--help`.
 
-O JSON mantém a estrutura: `version`, `language`, `fallback` e `entries` com `id`, `keywords`, `question`, `answer`, `source` e `category`. O LiveChat Pro usa isso com `BOT_MODE=knowledge-base` para responder antes de encaminhar ao administrador.
+O JSON mantém a estrutura: `version`, `language`, `fallback` e `entries` com `id`, `keywords`, `question`, `answer`, `source` e `category`. O Super Chat Manager usa isso com `BOT_MODE=knowledge-base` para responder antes de encaminhar ao administrador.

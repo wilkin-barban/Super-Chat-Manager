@@ -1,5 +1,5 @@
 // ============================================================
-// LiveChat Pro — scripts/migrate-kb-to-rag.js
+// Super Chat Manager — scripts/migrate-kb-to-rag.js
 // One-time migration script importing legacy data/knowledge-base.json
 // items into the RAG database system.
 // ============================================================

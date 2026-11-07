@@ -226,7 +226,7 @@ describe('RAG Core — SQLite Tables & Service Storage', () => {
     const sharedInstallation = 'Para instalar el proyecto, descargue el repositorio, instale las dependencias y ejecute la aplicación. ';
     const filler = 'Incluye configuración, pruebas automatizadas, documentación y ejemplos de uso. '.repeat(12);
     const projects = [
-      ['LiveChat Pro', 'LiveChat-Pro', 'LiveChat Pro ofrece chat web, administración y respuestas inteligentes con RAG.'],
+      ['Super Chat Manager', 'Super-Chat-Manager', 'Super Chat Manager ofrece chat web, administración y respuestas inteligentes con RAG.'],
       ['WSL Manager Pro', 'WSL-Manager-Pro', 'WSL Manager Pro administra distribuciones y entornos de desarrollo sobre WSL.'],
       ['Photo Dedup', 'photo-dedup', 'Photo Dedup detecta imágenes duplicadas mediante hashes perceptuales.'],
       ['YouTube Downloader', 'youtube-downloader', 'YouTube Downloader descarga y organiza contenido multimedia.'],
@@ -241,14 +241,14 @@ describe('RAG Core — SQLite Tables & Service Storage', () => {
       });
     }
 
-    const results = await ragService.retrieve('¿Cómo se instala LiveChat Pro?');
+    const results = await ragService.retrieve('¿Cómo se instala Super Chat Manager?');
     assert.ok(results.length >= 1);
-    assert.equal(results[0].title, 'LiveChat Pro');
-    assert.ok(results.every(result => result.title === 'LiveChat Pro'));
+    assert.equal(results[0].title, 'Super Chat Manager');
+    assert.ok(results.every(result => result.title === 'Super Chat Manager'));
 
-    const partialNameResults = await ragService.retrieve('¿Cómo se instala LiveChat?');
+    const partialNameResults = await ragService.retrieve('¿Cómo se instala Super Chat Manager?');
     assert.ok(partialNameResults.length >= 1);
-    assert.ok(partialNameResults.every(result => result.title === 'LiveChat Pro'));
+    assert.ok(partialNameResults.every(result => result.title === 'Super Chat Manager'));
   });
 
   it('retrieve() respeta valores explícitos de cero en sus opciones', async () => {

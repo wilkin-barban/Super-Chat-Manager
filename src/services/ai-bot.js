@@ -33,7 +33,7 @@ const LANGUAGE_HINTS = {
 // ── Project detection ────────────────────────────────────────────────────────
 // Maps canonical token → internal project key.
 const PROJECT_TOKENS = {
-  livechat:     ['livechat', 'chatpro'],
+  livechat:     ['livechat', 'chatpro', 'superchatmanager'],
   photodup:     ['photodup', 'photodedup'],
   normalizador: ['normalizador'],
   youtube:      ['youtubedownloader', 'ytdownloader', 'ytdlp'],
@@ -109,7 +109,7 @@ const ENTRY_INTENTS = {
 };
 
 // ── Disambiguation questions ─────────────────────────────────────────────────
-const PROJECTS_LIST = '• LiveChat Pro\n• YouTube Downloader\n• PhotoDedup\n• Normalizador Audio';
+const PROJECTS_LIST = '• Super Chat Manager\n• YouTube Downloader\n• PhotoDedup\n• Normalizador Audio';
 
 const DISAMBIGUATION = {
   install:      `¿Sobre qué proyecto quieres instrucciones de instalación?\n${PROJECTS_LIST}`,

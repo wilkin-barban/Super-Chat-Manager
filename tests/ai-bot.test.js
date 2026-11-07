@@ -8,8 +8,8 @@ const assert = require('node:assert/strict');
 const aiBot = require('../src/services/ai-bot');
 
 test('postprocessWebReply removes empty opening filler and decorative role emoji without deleting the closing', () => {
-  const result = aiBot.postprocessWebReply(`¡Claro!\n\n## 🤖 Resumen\n\n**LiveChat Pro** usa RAG.\n\n¿Hay algo más en lo que pueda ayudarte?`);
-  assert.equal(result, '## Resumen\n\n**LiveChat Pro** usa RAG.\n\n¿Hay algo más en lo que pueda ayudarte?');
+  const result = aiBot.postprocessWebReply(`¡Claro!\n\n## 🤖 Resumen\n\n**Super Chat Manager** usa RAG.\n\n¿Hay algo más en lo que pueda ayudarte?`);
+  assert.equal(result, '## Resumen\n\n**Super Chat Manager** usa RAG.\n\n¿Hay algo más en lo que pueda ayudarte?');
 });
 
 test('postprocessWebReply preserves substantive questions, Markdown, and code symbols', () => {
@@ -82,8 +82,8 @@ test('knowledge bot keeps disambiguation context on the real session', async () 
         id: 'livechat-instalacion',
         language: 'es',
         keywords: ['instalar livechat', 'configurar livechat'],
-        question: '¿Cómo instalo LiveChat Pro?',
-        answer: 'Instala LiveChat Pro con node setup.js.',
+        question: '¿Cómo instalo Super Chat Manager?',
+        answer: 'Instala Super Chat Manager con node setup.js.',
         source: 'test',
         category: 'instalacion',
       },
@@ -94,7 +94,7 @@ test('knowledge bot keeps disambiguation context on the real session', async () 
   assert.equal(first.escalate, false);
   assert.equal(session.botContext?.pendingIntent, 'install');
 
-  const second = await aiBot.getReply(session, 'LiveChat Pro');
+  const second = await aiBot.getReply(session, 'Super Chat Manager');
   assert.equal(second.escalate, false);
   assert.match(second.reply, /node setup\.js/);
   assert.equal(session.botContext, null);
@@ -430,11 +430,11 @@ test('inventory query returns the deterministic six-project catalog despite stal
   const documents = [
     ['AI Workspace Manager', 'https://github.com/example/AI-Workspace-Manager'],
     ['WSL Manager Pro', 'https://github.com/example/WSL-Manager-Pro'],
-    ['LiveChat Pro', 'https://github.com/example/LiveChat-Pro'],
+    ['Super Chat Manager', 'https://github.com/example/Super-Chat-Manager'],
     ['Photo Dedup', 'https://github.com/example/photo-dedup'],
     ['Normalizador Audio', 'https://github.com/example/normalizador-audio'],
     ['YouTube Downloader', 'https://github.com/example/youtube-downloader'],
-    ['LiveChat duplicate', 'https://github.com/example/livechat-pro.git/'],
+    ['Super Chat Manager duplicate', 'https://github.com/example/super-chat-manager.git/'],
   ].map(([title, source]) => ({ title, source, source_type: 'url' }));
   documents.push(
     { title: 'Manual PDF', source: 'manual.pdf', source_type: 'pdf' },
@@ -448,7 +448,7 @@ test('inventory query returns the deterministic six-project catalog despite stal
     apiKey: 'persisted-key',
     ragService: {
       async listDocuments() { return documents; },
-      async retrieve() { return [{ text: 'AI Workspace details' }, { text: 'LiveChat details' }]; },
+      async retrieve() { return [{ text: 'AI Workspace details' }, { text: 'Super Chat Manager details' }]; },
     },
     llmService: { async chat() { llmCalled = true; return { ok: true, text: 'Tengo información de 2 proyectos.' }; } },
   });
@@ -476,14 +476,14 @@ test('singular project information query continues to the configured LLM', async
     provider: 'deepseek',
     apiKey: 'persisted-key',
     ragService: {
-      async listDocuments() { return [{ title: 'LiveChat Pro', source: 'https://github.com/example/livechat-pro', source_type: 'url' }]; },
-      async retrieve() { return [{ text: 'LiveChat details' }]; },
+      async listDocuments() { return [{ title: 'Super Chat Manager', source: 'https://github.com/example/super-chat-manager', source_type: 'url' }]; },
+      async retrieve() { return [{ text: 'Super Chat Manager details' }]; },
     },
-    llmService: { async chat() { llmCalled = true; return { ok: true, text: 'LiveChat information' }; } },
+    llmService: { async chat() { llmCalled = true; return { ok: true, text: 'Super Chat Manager information' }; } },
   });
 
-  const result = await aiBot.getReply({ messages: [], lang: 'es' }, 'Dame información del proyecto LiveChat Pro');
-  assert.equal(result.reply, 'LiveChat information');
+  const result = await aiBot.getReply({ messages: [], lang: 'es' }, 'Dame información del proyecto Super Chat Manager');
+  assert.equal(result.reply, 'Super Chat Manager information');
   assert.equal(llmCalled, true);
 });
 
@@ -596,7 +596,7 @@ test('getSystemPrompt forwards rag_context into getFormattedPrompt vars', async 
 
   aiBot.configure({
     enabled: true,
-    siteTitle: 'LiveChat Pro',
+    siteTitle: 'Super Chat Manager',
     masterPromptService,
   });
 

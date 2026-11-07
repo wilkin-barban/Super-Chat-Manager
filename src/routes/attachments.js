@@ -71,7 +71,7 @@ function createAttachmentRouter(deps) {
   const uploadImage = runUpload(createUploadMiddleware(attachmentService));
 
   // Optional widget API key protects upload endpoints when the project is embedded
-  // on domains outside the LiveChat Pro server.
+  // on domains outside the Super Chat Manager server.
   function validateWidgetKey(req, res, next) {
     if (!WIDGET_API_KEY) return next();
     const provided = String(req.get('x-widget-api-key') || '');

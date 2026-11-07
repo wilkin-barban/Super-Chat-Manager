@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <title>LiveChat Pro Admin</title>
+  <title>Super Chat Manager Admin</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
     :root { --bg:#f5f7fb; --surface:#fff; --soft:#f8fafc; --line:#e2e8f0; --ink:#172033; --muted:#64748b; --accent:#4f46e5; --accent-strong:#3730a3; --accent-soft:#eef2ff; --ok:#059669; --warn:#b45309; --danger:#dc2626; --field-bg:#fff; --field-ink:#172033; --field-placeholder:#94a3b8; --shadow:0 18px 50px rgba(15,23,42,.07); --button-shadow:0 8px 18px rgba(15,23,42,.08); }
@@ -263,7 +263,7 @@
 <body>
   <div id="loginView" class="login-shell hidden">
     <form id="loginForm" class="login-card">
-      <div class="brand-mark">LiveChat Pro Admin</div>
+      <div class="brand-mark">Super Chat Manager Admin</div>
       <div><h2 data-i18n="loginTitle">Acceso administrador</h2><p class="muted" data-i18n="loginLead">Panel privado para gestionar chats, usuarios y estado general del sistema.</p></div>
       <input id="passwordInput" type="password" autocomplete="current-password" placeholder="Contraseña del panel" data-i18n-placeholder="password" required>
       <div id="loginNotice" class="notice" data-i18n="loginNotice">Inicia sesión para cargar el panel.</div>
@@ -580,7 +580,7 @@
       const knowledgeCopy = knowledgeCardCopy[lang] || knowledgeCardCopy.es;
       const t = (key, ...args) => typeof copy[key] === 'function' ? copy[key](...args) : (copy[key] || extraCopy[key] || knowledgeCopy[key] || dictionaries.es[key] || attachmentCopy.es[key] || knowledgeCardCopy.es[key] || key);
       document.documentElement.lang = lang;
-      document.title = `LiveChat Pro Admin`;
+      document.title = `Super Chat Manager Admin`;
       const state = { sessions: [], selectedSessionId: null, selectedMessages: [], onlyLive: false, query: '', socket: null, csrfToken: null, typingTimer: null, metricsTimer: null };
       const allowedImageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
       const maxImageBytes = 5 * 1024 * 1024;

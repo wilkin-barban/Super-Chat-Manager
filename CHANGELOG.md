@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Changed
+- Rebranded LiveChat Pro as **Super Chat Manager**; the official repository is now `https://github.com/wilkin-barban/Super-Chat-Manager`.
+- Updated the package name, Docker image/CI, install URLs, documentation and the widget config alias. Legacy internal identifiers (`data/livechat.db`, `livechat_data`, `lcp`, `LIVECHAT_*`, `lchat_sid`) remain for compatibility.
+
+---
+
 ## [1.1.0] - 2026-08-09
 
 ### Added

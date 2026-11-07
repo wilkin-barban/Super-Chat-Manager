@@ -88,7 +88,7 @@ test('widget detecta modo movil y responde a cambios de viewport', () => {
 });
 
 test('widget expone configuracion responsive por cliente', () => {
-  assert.match(widgetSource, /window\.LiveChatConfig \|\| window\.LiveChatProConfig/);
+  assert.match(widgetSource, /window\.SuperChatManagerConfig \|\| window\.LiveChatConfig \|\| window\.LiveChatProConfig/);
   assert.match(widgetSource, /data-\$\{name\.replace/);
   assert.match(widgetSource, /mobileMode: optionIn\(getOption\('mobileMode', 'dock'\)/);
   assert.match(widgetSource, /mobileWidth: parsePercent\(getOption\('mobileWidth', 100\)/);
@@ -175,5 +175,5 @@ test('documentacion describe el comportamiento responsive', () => {
   assert.match(readmeSource, /data-mobile-focused-width/);
   assert.match(readmeSource, /data-mobile-focused-height/);
   assert.match(readmeSource, /Defecto: `dock`/);
-  assert.match(readmeSource, /window\.LiveChatConfig/);
+  assert.match(readmeSource, /window\.SuperChatManagerConfig/);
 });

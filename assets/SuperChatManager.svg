@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220" role="img" aria-label="Super Chat Manager">
+  <defs>
+    <linearGradient id="scm-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="220" height="220" rx="48" fill="url(#scm-gradient)"/>
+  <path d="M48 78c0-14 11-25 25-25h74c14 0 25 11 25 25v52c0 14-11 25-25 25h-40l-30 25v-25h-4c-14 0-25-11-25-25V78z" fill="#ffffff" opacity="0.96"/>
+  <circle cx="83" cy="99" r="7" fill="#2563eb"/>
+  <circle cx="110" cy="99" r="7" fill="#2563eb"/>
+  <circle cx="137" cy="99" r="7" fill="#2563eb"/>
+  <text x="110" y="171" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#ffffff">Super Chat Manager</text>
+</svg>

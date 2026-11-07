@@ -3,7 +3,7 @@
 **Change**: telegram-control — Token & Admin Fields in the Admin UI, 404 Fix
 **Archived to**: `openspec/changes/archive/2026-08-07-telegram-control/`
 **Archive date**: 2026-08-07
-**Project**: livechat-pro (repo `/home/wilkin/proyectos/Chat`)
+**Project**: livechat-pro (repo `/home/user/proyectos/Chat`)
 **Artifact store mode**: hybrid (`both`) — delta specs synced into `openspec/specs/`, change folder moved to archive, Engram mirror persisted.
 
 ## Final Verification Status

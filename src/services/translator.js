@@ -87,12 +87,12 @@ async function runTranslationAdapter(text, targetLang, config) {
 
 // ── Proper-noun protection ──────────────────────────────────────────────────
 // Project names, person names, and place names that must never be translated.
-// Listed longest-first so partial names (e.g. 'LiveChat') don't shadow
-// longer ones ('LiveChat Pro') during regex matching.
+// Listed longest-first so partial names (e.g. 'Super Chat Manager') don't shadow
+// longer ones ('Super Chat Manager') during regex matching.
 const PROTECTED_NAMES = [
   // Projects
-  'LiveChat Pro',
-  'LiveChat',
+  'Super Chat Manager',
+  'Super Chat Manager',
   'YouTube Downloader',
   'PhotoDedup',
   'Photo Dedup',

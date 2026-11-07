@@ -1,5 +1,5 @@
 # ============================================================
-# LiveChat Pro — Dockerfile
+# Super Chat Manager — Dockerfile
 # Build multi-stage: instala sólo dependencias de producción,
 # luego copia al contenedor final con usuario no-root.
 # ============================================================
@@ -21,9 +21,9 @@ RUN npm ci --omit=dev --ignore-scripts
 FROM node:24-slim AS final
 
 # Metadatos
-LABEL org.opencontainers.image.title="LiveChat Pro" \
-      org.opencontainers.image.description="Chat en vivo auto-hospedado con integración Telegram" \
-      org.opencontainers.image.source="https://github.com/tu-usuario/livechat-pro"
+LABEL org.opencontainers.image.title="Super Chat Manager" \
+      org.opencontainers.image.description="Self-hosted live chat manager with Telegram integration, RAG knowledge base and Docker deployment" \
+      org.opencontainers.image.source="https://github.com/wilkin-barban/Super-Chat-Manager"
 
 # Variables de entorno de Node.js para producción
 ENV NODE_ENV=production \

@@ -3,7 +3,7 @@
 **Change**: ai-model-flow — API-verified model listing + two-step provider config, boot rehydration, RAG placeholder fix
 **Archived to**: `openspec/changes/archive/2026-08-07-ai-model-flow/`
 **Archive date**: 2026-08-07
-**Project**: livechat-pro (repo `/home/wilkin/proyectos/Chat`)
+**Project**: livechat-pro (repo `/home/user/proyectos/Chat`)
 **Artifact store mode**: hybrid (`both`) — delta specs synced into `openspec/specs/`, change folder moved to archive, Engram mirror persisted.
 
 ## Final Verification Status
@@ -14,7 +14,7 @@
 |--------|-------|
 | Requirements | 5/5 compliant |
 | Scenarios | 19/19 compliant |
-| Tests | 403 passed / 0 failed / 21 suites / 0 skipped (`SETTINGS_KEY=… npm test`, exit 0 — run in fresh worktree `/home/wilkin/proyectos/Chat-worktrees/verify-ai-model-flow` with writable `data/`) |
+| Tests | 403 passed / 0 failed / 21 suites / 0 skipped (`SETTINGS_KEY=… npm test`, exit 0 — run in fresh worktree `/home/user/proyectos/Chat-worktrees/verify-ai-model-flow` with writable `data/`) |
 | Build/lint | `npx biome check .` exit 0 (25 warnings / 55 infos = documented pre-existing baseline; `public/admin.html` out of biome scope) |
 | Host-checkout run | 356 tests / 352 pass / 4 fail — the 4 failures are the KNOWN EACCES environmental baseline (`data/.admin-secret` owned by uid 1000, shell uid 1001) in api.test.js, dead-code-audit.test.js, telegram-routing.test.js, translation-cache.test.js; byte-identical to main's baseline, proven non-regressive by the 403/403 fresh-worktree run. `data/` NOT chowned. |
 | Coverage | Not available — no coverage tool configured (informational, not a failure) |

@@ -15,7 +15,7 @@
 const telegrafPath = require.resolve('telegraf');
 const getMeCalls = [];
 const createdTokens = [];
-let getMeResult = { id: 8609135566, username: 'ChatVivo_Wilkin_bot', first_name: 'LiveChat Pro' };
+let getMeResult = { id: 8609135566, username: 'ChatVivo_Wilkin_bot', first_name: 'Super Chat Manager' };
 let getMeError = null;
 // Simulates real Telegraf launch latency (async getUpdates handshake). The
 // default launch() resolves synchronously, which would mask the
@@ -88,7 +88,7 @@ async function resetBot() {
   createdTokens.length = 0;
   getMeError = null;
   launchDelayMs = 0;
-  getMeResult = { id: 8609135566, username: 'ChatVivo_Wilkin_bot', first_name: 'LiveChat Pro' };
+  getMeResult = { id: 8609135566, username: 'ChatVivo_Wilkin_bot', first_name: 'Super Chat Manager' };
 }
 
 // ── verifyTelegramToken ─────────────────────────────────────
@@ -99,7 +99,7 @@ test('verifyTelegramToken resuelve identidad válida con el token dado', async (
     ok: true,
     id: 8609135566,
     username: 'ChatVivo_Wilkin_bot',
-    first_name: 'LiveChat Pro',
+    first_name: 'Super Chat Manager',
   });
   assert.equal(getMeCalls.length, 1);
   assert.equal(getMeCalls[0], TOKEN_A);
@@ -293,7 +293,7 @@ test('getTelegramStatus expone maskedToken/tokenSource/identidad, nunca token co
   assert.equal(status.maskedToken, '…AAAA');
   assert.equal(status.tokenSource, 'settings');
   assert.equal(status.botUsername, 'ChatVivo_Wilkin_bot');
-  assert.equal(status.botFirstName, 'LiveChat Pro');
+  assert.equal(status.botFirstName, 'Super Chat Manager');
   assert.equal(status.token, undefined);
   assert.equal(status.botToken, undefined);
 });
@@ -334,7 +334,7 @@ test('refreshTelegramIdentity llena la identidad y la cachea 5 minutos', async (
 
   const identity = await refreshTelegramIdentity();
   assert.equal(identity.username, 'ChatVivo_Wilkin_bot');
-  assert.equal(identity.firstName, 'LiveChat Pro');
+  assert.equal(identity.firstName, 'Super Chat Manager');
   assert.ok(identity.fetchedAt > 0);
   assert.equal(getMeCalls.length, 1);
 
@@ -344,7 +344,7 @@ test('refreshTelegramIdentity llena la identidad y la cachea 5 minutos', async (
 
   const status = getTelegramStatus();
   assert.equal(status.botUsername, 'ChatVivo_Wilkin_bot');
-  assert.equal(status.botFirstName, 'LiveChat Pro');
+  assert.equal(status.botFirstName, 'Super Chat Manager');
 });
 
 test('refreshTelegramIdentity falla suave a null ante error de getMe', async () => {

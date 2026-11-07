@@ -9,13 +9,13 @@
 
 The `systemic-audit-remediation` change has been successfully verified and archived. It systemically resolved audit findings H-01 through H-08 across four remediation clusters: write-ahead session persistence integrity, SSRF network ingestion protection and RAG bounds, deterministic three-stage infrastructure shutdown and crash-safe presence recovery, and audited dead-export pruning, orphan attachment cleanup, structured migration error logging, and composition-root admin route modularization.
 
-All 17 implementation tasks across 4 clusters were completed and verified on local main at candidate commit `45fb50785c878c118e9172a53914e6c994469eea`. The full test suite of 527 tests across 46 committed test suites passes cleanly (`TMPDIR=/home/wilkin/proyectos npm test` exit code 0).
+All 17 implementation tasks across 4 clusters were completed and verified on local main at candidate commit `45fb50785c878c118e9172a53914e6c994469eea`. The full test suite of 527 tests across 46 committed test suites passes cleanly (`TMPDIR=/home/user/proyectos npm test` exit code 0).
 
 ## Final State Facts & Verification Summary
 
 - **Task Completion**: 17/17 tasks in `tasks.md` completed (`[x]`).
 - **Spec Verification (`sdd-verify`)**: VERDICT PASS WITH WARNINGS — 17/17 requirements and 31/31 scenarios compliant.
-- **Runtime Execution**: 527/527 tests passing across 46 committed test files (`TMPDIR=/home/wilkin/proyectos npm test` exit code 0).
+- **Runtime Execution**: 527/527 tests passing across 46 committed test files (`TMPDIR=/home/user/proyectos npm test` exit code 0).
 - **Candidate Commit**: `45fb50785c878c118e9172a53914e6c994469eea` (tree `2a554bf09d1ad8b1d8ef3a74cf21ecc0d8e4fc82`, baseline `c24a27fb739b4175b46a0333f5cc9649cd5a6547`).
 - **Committed Work Units**:
   1. `b48f25f feat(sessions): persist and reconcile durable chat state`

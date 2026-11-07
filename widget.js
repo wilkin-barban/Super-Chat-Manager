@@ -1,5 +1,5 @@
 /**
- * LiveChat Pro — widget.js
+ * Super Chat Manager — widget.js
  * Insert this script into any HTML page:
  * <script src="https://your-server.com/widget.js" data-server="https://your-server.com"></script>
  */
@@ -93,7 +93,7 @@ if (typeof module !== 'undefined' && module.exports) {
   const SCRIPT_TAG = document.currentScript || document.querySelector('script[data-server]');
   const SERVER_URL = (SCRIPT_TAG && SCRIPT_TAG.getAttribute('data-server')) || window.location.origin;
   const API_KEY = (SCRIPT_TAG && (SCRIPT_TAG.getAttribute('data-api-key') || SCRIPT_TAG.getAttribute('data-key'))) || '';
-  const CLIENT_CONFIG = window.LiveChatConfig || window.LiveChatProConfig || {};
+  const CLIENT_CONFIG = window.SuperChatManagerConfig || window.LiveChatConfig || window.LiveChatProConfig || {};
   // Options can be configured either as data-* attributes on the script tag or
   // through a global config object. Attributes win because they are colocated with
   // the embed snippet.
@@ -195,7 +195,8 @@ if (typeof module !== 'undefined' && module.exports) {
   const uiText = UI_MESSAGES[WIDGET_BASE_LANG];
 
   // ── Prevent double init ──────────────────────────────────
-  if (window.__livechatPro) return;
+  if (window.__superChatManagerPro || window.__livechatPro) return;
+  window.__superChatManagerPro = true;
   window.__livechatPro = true;
 
   // ── Load Socket.io ───────────────────────────────────────

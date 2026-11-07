@@ -70,8 +70,8 @@ async function callOpenAiCompatible({
     };
 
     if (provider === 'openrouter') {
-      headers['HTTP-Referer'] = 'https://livechat-pro.local';
-      headers['X-Title'] = 'LiveChat Pro';
+      headers['HTTP-Referer'] = 'https://super-chat-manager.local';
+      headers['X-Title'] = 'Super Chat Manager';
     }
 
     const res = await fetchFn(endpoint, {
