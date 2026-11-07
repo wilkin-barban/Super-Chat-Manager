@@ -1,40 +1,23 @@
-# ============================================================
-# Super Chat Manager — docker-compose.yml
-# Uso: docker compose up -d
-# Requiere un fichero .env en el mismo directorio.
-# ============================================================
-
 services:
   super-chat-manager:
     build:
       context: .
       dockerfile: Dockerfile
+    image: super-chat-manager:latest
     container_name: super-chat-manager
     restart: unless-stopped
-
-    # Las variables se leen del fichero .env — NUNCA hardcodear tokens aquí
     env_file: .env
-
-    # NODE_ENV se fuerza a producción independientemente del .env
     environment:
       - NODE_ENV=production
       - REDIS_URL=${REDIS_URL:-redis://redis:6379}
       - REDIS_KEY_PREFIX=${REDIS_KEY_PREFIX:-lcp}
-
     ports:
-      # HOST_PORT público -> PORT interno del contenedor.
-      # En VPS usa HOST_PORT=8080 y mantiene PORT=3000 dentro del contenedor.
-      - "${HOST_PORT:-3000}:${PORT:-3000}"
-
+      - "172.17.0.1:3000:${PORT:-3010}"
     volumes:
-      # Volumen con nombre para la base de datos SQLite.
-      # Los datos persisten entre reinicios y actualizaciones de imagen.
-      - livechat_data:/app/data
-
+      - ./data:/app/data
     depends_on:
       redis:
         condition: service_started
-
     healthcheck:
       test:
         - "CMD"
@@ -42,7 +25,7 @@ services:
         - "-e"
         - |
           const h = require('http');
-          const port = String(process.env.PORT || 3000).replace(/^["']|["']$/g, '');
+          const port = String(process.env.PORT || 3010).replace(/^["']|["']$/g, '');
           if (!/^\d+$/.test(port)) process.exit(1);
           h.get('http://localhost:' + port + '/health', r => {
             process.exit(r.statusCode === 200 ? 0 : 1);
@@ -51,14 +34,10 @@ services:
       timeout: 5s
       start_period: 20s
       retries: 3
-
-    # Límites de recursos razonables para un VPS pequeño
     deploy:
       resources:
         limits:
           memory: 256M
-
-    # Logging estructurado con rotación para no llenar el disco
     logging:
       driver: json-file
       options:
@@ -69,12 +48,9 @@ services:
     image: redis:7-alpine
     container_name: super-chat-manager-redis
     restart: unless-stopped
-
     command: ["redis-server", "--appendonly", "yes"]
-
     volumes:
       - redis_data:/data
-
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 30s
@@ -83,7 +59,5 @@ services:
       retries: 3
 
 volumes:
-  livechat_data:
-    driver: local
   redis_data:
     driver: local
