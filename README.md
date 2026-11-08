@@ -13,6 +13,7 @@
     <a href="https://telegram.org/"><img alt="Telegram Bot" src="https://img.shields.io/badge/Telegram-bot-26A5E4.svg?logo=telegram&logoColor=white"></a>
     <a href="https://www.sqlite.org/"><img alt="SQLite" src="https://img.shields.io/badge/SQLite-persistence-003B57.svg?logo=sqlite&logoColor=white"></a>
     <a href="https://github.com/wilkin-barban/Super-Chat-Manager/tags"><img alt="Version" src="https://img.shields.io/github/v/tag/wilkin-barban/Super-Chat-Manager?label=Version"></a>
+    <a href="https://github.com/wilkin-barban/Super-Chat-Manager/releases"><img alt="Release" src="https://img.shields.io/github/v/release/wilkin-barban/Super-Chat-Manager?label=Release"></a>
     <a href="#educational-project"><img alt="Purpose Educational" src="https://img.shields.io/badge/Purpose-Educational-orange.svg"></a>
   </p>
 
@@ -29,8 +30,14 @@
 
 Self-hosted live chat manager with an embeddable widget, Telegram integration, single web administration panel, RAG knowledge base, SQLite persistence and recommended Docker deployment.
 
-## Version 1.1.0 Highlights
+**Releases:** [GitHub Releases](https://github.com/wilkin-barban/Super-Chat-Manager/releases) · **Container images:** `ghcr.io/wilkin-barban/super-chat-manager:latest` and `:1.2.0`.
 
+## Version 1.2.0 Highlights
+
+- Rebranded to **Super Chat Manager** with the official repository at `wilkin-barban/Super-Chat-Manager`; legacy data and identifiers remain compatible.
+- Durable chat session state and hardened lifecycle/presence recovery across reconnects and restarts.
+- Bounded, security-reviewed remote RAG ingestion with request-secret redaction.
+- Modularized admin routes, stricter test/repository hygiene, and Node 24/Docker CI maintenance.
 - Responsive administration for chats, AI, knowledge, prompts, Telegram, and widget appearance.
 - Admin-managed RAG from text, PDF, public URLs, or bounded GitHub snapshots. Sources remain **Pending** until the default model is verified and an administrator selects **Index new content**.
 - Global deduplication and safe URL revision publishing: the previous GitHub snapshot stays active until its replacement is indexed.
@@ -43,7 +50,7 @@ Self-hosted live chat manager with an embeddable widget, Telegram integration, s
 2. Add text, a PDF, a public URL, or a GitHub repository in **Admin → Knowledge**.
 3. Review **Pending** entries and select **Index new content**. Only **Indexed** entries answer visitor questions.
 
-> The legacy JSON trainer remains for compatibility and reference. With a provider configured, v1.1.0 answers from the admin RAG index and does not silently fall back to stale JSON training.
+> The legacy JSON trainer remains for compatibility and reference. With a provider configured, v1.2.0 answers from the admin RAG index and does not silently fall back to stale JSON training.
 
 ## What It Does
 
