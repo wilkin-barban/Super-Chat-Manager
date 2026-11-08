@@ -1,6 +1,7 @@
 {
   "name": "super-chat-manager",
   "version": "1.2.0",
+  "private": true,
   "description": "Self-hosted Super Chat Manager with Telegram integration, RAG knowledge base, admin panel, SQLite and Docker deployment",
   "license": "GPL-3.0-or-later",
   "repository": {
