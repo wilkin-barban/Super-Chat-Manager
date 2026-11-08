@@ -68,8 +68,9 @@ class ClusterState {
     if (!this.stateClient) return;
     const values = Object.fromEntries(this.localPresence);
     await this.stateClient.del(this.nodePresenceKey());
-    if (Object.keys(values).length) await this.stateClient.hSet(this.nodePresenceKey(), values);
-    if (Object.keys(values).length) await this.stateClient.expire(this.nodePresenceKey(), 60);
+    const entries = Object.entries(values).flatMap(([field, value]) => [field, String(value)]);
+    if (entries.length) await this.stateClient.hSet(this.nodePresenceKey(), ...entries);
+    if (entries.length) await this.stateClient.expire(this.nodePresenceKey(), 60);
   }
 
   telegramMessageKey(adminId, messageId) {
@@ -144,6 +145,7 @@ class ClusterState {
     subClient.on('error', errorHandler);
     stateClient.on('error', errorHandler);
 
+
     pubClient.on('connect', () => { hasConnected = true; });
     subClient.on('connect', () => { hasConnected = true; });
     stateClient.on('connect', () => { hasConnected = true; });
@@ -196,7 +198,7 @@ class ClusterState {
   async seedBanned(sessionIds) {
     for (const sessionId of sessionIds) this.bannedSessions.add(sessionId);
     if (!this.stateClient || !sessionIds.length) return;
-    await this.stateClient.sAdd(this.key('banned'), sessionIds);
+    await this.stateClient.sAdd(this.key('banned'), ...sessionIds);
   }
 
   async isBanned(sessionId) {
@@ -275,7 +277,7 @@ class ClusterState {
     const localCount = Math.max(0, (this.localPresence.get(sessionId) || 0) - 1);
     if (localCount) this.localPresence.set(sessionId, localCount);
     else this.localPresence.delete(sessionId);
-    if (localCount) await this.stateClient.hSet(this.nodePresenceKey(), { [sessionId]: localCount });
+    if (localCount) await this.stateClient.hSet(this.nodePresenceKey(), sessionId, String(localCount));
     else await this.stateClient.hDel(this.nodePresenceKey(), sessionId);
     await this.stateClient.expire(this.nodePresenceKey(), 60);
     return this.getPresence(sessionId);
@@ -331,7 +333,7 @@ class ClusterState {
     if (!this.stateClient || !sessionIds.length) return snapshots;
 
     const keys = sessionIds.map(sessionId => this.sessionKey(sessionId));
-    const values = await this.stateClient.mGet(keys);
+    const values = await this.stateClient.mGet(...keys);
 
     values.forEach((raw, index) => {
       if (!raw) return;
