@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/wilkin-barban/Super-Chat-Manager#readme
+    about: Installation, setup, Docker and configuration guides.
+  - name: Security report
+    url: https://github.com/wilkin-barban/Super-Chat-Manager/security/advisories/new
+    about: Do not publish vulnerabilities or secrets in a public issue.
