@@ -11,8 +11,14 @@
 
 Super Chat Manager es un gestor de chat en vivo auto-hospedado con widget embebible, integración con Telegram, panel web de administración único, base de conocimiento RAG, persistencia SQLite y despliegue recomendado con Docker.
 
-## Novedades de la versión 1.1.0
+**Releases:** [GitHub Releases](https://github.com/wilkin-barban/Super-Chat-Manager/releases) · **Imágenes de contenedor:** `ghcr.io/wilkin-barban/super-chat-manager:latest` y `:1.2.0`.
 
+## Novedades de la versión 1.2.0
+
+- Rebranding a **Super Chat Manager** con repositorio oficial en `wilkin-barban/Super-Chat-Manager`; los datos e identificadores legacy siguen siendo compatibles.
+- Estado de sesiones durable y recuperación de ciclo de vida/presencia endurecida ante reconexiones y reinicios.
+- Ingesta remota RAG acotada y revisada en seguridad, con redacción de secretos en solicitudes.
+- Rutas de administración modularizadas, mayor higiene de tests/repositorio y mantenimiento de CI Node 24/Docker.
 - Administración responsive para chats, IA, conocimiento, prompts, Telegram y apariencia del widget.
 - RAG administrado desde texto, PDF, URLs públicas o snapshots limitados de GitHub. Las fuentes quedan **Pendientes** hasta verificar el modelo predeterminado y pulsar **Indexar contenido nuevo**.
 - Deduplicación global y publicación segura de revisiones URL: el snapshot GitHub anterior continúa activo hasta indexar su reemplazo.
@@ -25,7 +31,7 @@ Super Chat Manager es un gestor de chat en vivo auto-hospedado con widget embebi
 2. Añade texto, PDF, URL pública o repositorio GitHub en **Admin → Conocimiento**.
 3. Revisa las entradas **Pendientes** y pulsa **Indexar contenido nuevo**. Solo las entradas **Indexadas** responden consultas.
 
-> El entrenador JSON se conserva por compatibilidad y referencia. Con un proveedor configurado, v1.1.0 responde desde el índice RAG administrativo y no vuelve silenciosamente a entrenamientos JSON antiguos.
+> El entrenador JSON se conserva por compatibilidad y referencia. Con un proveedor configurado, v1.2.0 responde desde el índice RAG administrativo y no vuelve silenciosamente a entrenamientos JSON antiguos.
 
 ## Qué Hace
 

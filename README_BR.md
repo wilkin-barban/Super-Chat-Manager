@@ -11,8 +11,14 @@
 
 Super Chat Manager é um gerenciador de chat ao vivo auto-hospedado com widget incorporável, integração com Telegram, painel web único de administração, base de conhecimento RAG, persistência SQLite e implantação recomendada com Docker.
 
-## Novidades da versão 1.1.0
+**Releases:** [GitHub Releases](https://github.com/wilkin-barban/Super-Chat-Manager/releases) · **Imagens de contêiner:** `ghcr.io/wilkin-barban/super-chat-manager:latest` e `:1.2.0`.
 
+## Novidades da versão 1.2.0
+
+- Rebranding para **Super Chat Manager** com repositório oficial em `wilkin-barban/Super-Chat-Manager`; dados e identificadores legacy permanecem compatíveis.
+- Estado de sessões durável e recuperação de ciclo de vida/presença reforçada em reconexões e reinícios.
+- Ingestão remota RAG limitada e revisada em segurança, com redação de segredos nas requisições.
+- Rotas de administração modularizadas, maior higiene de testes/repositório e manutenção de CI Node 24/Docker.
 - Administração responsiva para chats, IA, conhecimento, prompts, Telegram e aparência do widget.
 - RAG administrado a partir de texto, PDF, URLs públicas ou snapshots limitados do GitHub. As fontes ficam **Pendentes** até verificar o modelo padrão e selecionar **Indexar novo conteúdo**.
 - Deduplicação global e publicação segura de revisões URL: o snapshot GitHub anterior continua ativo até o substituto ser indexado.
@@ -25,7 +31,7 @@ Super Chat Manager é um gerenciador de chat ao vivo auto-hospedado com widget i
 2. Adicione texto, PDF, URL pública ou repositório GitHub em **Admin → Conhecimento**.
 3. Revise as entradas **Pendentes** e selecione **Indexar novo conteúdo**. Somente entradas **Indexadas** respondem às consultas.
 
-> O treinador JSON permanece para compatibilidade e referência. Com um provedor configurado, v1.1.0 responde pelo índice RAG administrativo e não retorna silenciosamente a treinamentos JSON antigos.
+> O treinador JSON permanece para compatibilidade e referência. Com um provedor configurado, v1.2.0 responde pelo índice RAG administrativo e não retorna silenciosamente a treinamentos JSON antigos.
 
 ## O Que Faz
 

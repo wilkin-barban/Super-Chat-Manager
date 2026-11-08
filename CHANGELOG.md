@@ -7,11 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased]
+## [1.2.0] - 2026-11-08
+
+### Added
+- Durable chat session state: sessions persist and reconcile across reconnects and restarts.
+- Hardened lifecycle and presence recovery for multi-client and reconnect scenarios.
+- Bounded, security-reviewed remote ingestion for RAG, including request-secret redaction and GitHub snapshot limits.
+- Tracked-test and repository hygiene checks in the development workflow.
 
 ### Changed
 - Rebranded LiveChat Pro as **Super Chat Manager**; the official repository is now `https://github.com/wilkin-barban/Super-Chat-Manager`.
-- Updated the package name, Docker image/CI, install URLs, documentation and the widget config alias. Legacy internal identifiers (`data/livechat.db`, `livechat_data`, `lcp`, `LIVECHAT_*`, `lchat_sid`) remain for compatibility.
+- Modularized admin route families for maintainability.
+- Updated the package name, Docker image/container names, CI Docker actions, install URLs, documentation and the widget config alias.
+- Legacy internal identifiers (`data/livechat.db`, `livechat_data`, `lcp`, `LIVECHAT_*`, `lchat_sid`) remain for compatibility.
+
+### Fixed
+- Node 24 `ERR_SQLITE_ERROR` handling in the duplicate-column migration path.
+- Session sync/shutdown and presence-recovery edge cases.
 
 ---
 
