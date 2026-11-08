@@ -18,7 +18,16 @@ function redisHarness() {
       const value = (Number(hash.get(field)) || 0) + amount;
       hash.set(field, String(value)); hashes.set(key, hash); return value;
     },
-    async hSet(key, values) { hashes.set(key, new Map(Object.entries(values).map(([k, v]) => [k, String(v)]))); },
+    async hSet(key, ...args) {
+      if (args.length === 1 && typeof args[0] === 'object') {
+        throw new Error('hSet object argument is not supported by redis v5');
+      }
+      const hash = hashes.get(key) || new Map();
+      for (let index = 0; index < args.length; index += 2) {
+        hash.set(String(args[index]), String(args[index + 1]));
+      }
+      hashes.set(key, hash);
+    },
     async hGet(key, field) { return hashes.get(key)?.get(field) || null; },
     async hDel(key, field) { if (failDelete) { failDelete = false; throw new Error('transient'); } hashes.get(key)?.delete(field); },
     async del(key) { hashes.delete(key); expiries.delete(key); },

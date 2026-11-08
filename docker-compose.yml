@@ -9,6 +9,7 @@ services:
     env_file: .env
     environment:
       - NODE_ENV=production
+      - REDIS_ENABLED=false
       - REDIS_URL=${REDIS_URL:-redis://redis:6379}
       - REDIS_KEY_PREFIX=${REDIS_KEY_PREFIX:-lcp}
     ports:
